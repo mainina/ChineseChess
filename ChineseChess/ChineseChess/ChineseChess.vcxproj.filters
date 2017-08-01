@@ -45,11 +45,97 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
+    <Image Include="RES\BA.bmp">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="ChineseChess.ico">
+    <Image Include="RES\BB.bmp">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="RES\BC.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\BK.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\BN.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\BOARD.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\BP.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\BR.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\ChineseChess.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\RA.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\RB.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\RC.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\RK.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\RN.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\RP.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\RR.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\SELECTED.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\small.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="RES\XQWIZARD.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="RES\CAPTURE.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\CAPTURE2.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\CHECK.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\CHECK2.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\CLICK.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\DRAW.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\ILLEGAL.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\LOSS.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\MOVE.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\MOVE2.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+    <Media Include="RES\WIN.wav">
+      <Filter>资源文件</Filter>
+    </Media>
   </ItemGroup>
 </Project>

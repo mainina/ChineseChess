@@ -156,8 +156,38 @@
     <ResourceCompile Include="ChineseChess.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ChineseChess.ico" />
-    <Image Include="small.ico" />
+    <Image Include="RES\BA.bmp" />
+    <Image Include="RES\BB.bmp" />
+    <Image Include="RES\BC.bmp" />
+    <Image Include="RES\BK.bmp" />
+    <Image Include="RES\BN.bmp" />
+    <Image Include="RES\BOARD.bmp" />
+    <Image Include="RES\BP.bmp" />
+    <Image Include="RES\BR.bmp" />
+    <Image Include="RES\ChineseChess.ico" />
+    <Image Include="RES\RA.bmp" />
+    <Image Include="RES\RB.bmp" />
+    <Image Include="RES\RC.bmp" />
+    <Image Include="RES\RK.bmp" />
+    <Image Include="RES\RN.bmp" />
+    <Image Include="RES\RP.bmp" />
+    <Image Include="RES\RR.bmp" />
+    <Image Include="RES\SELECTED.bmp" />
+    <Image Include="RES\small.ico" />
+    <Image Include="RES\XQWIZARD.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="RES\CAPTURE.wav" />
+    <Media Include="RES\CAPTURE2.wav" />
+    <Media Include="RES\CHECK.wav" />
+    <Media Include="RES\CHECK2.wav" />
+    <Media Include="RES\CLICK.wav" />
+    <Media Include="RES\DRAW.wav" />
+    <Media Include="RES\ILLEGAL.wav" />
+    <Media Include="RES\LOSS.wav" />
+    <Media Include="RES\MOVE.wav" />
+    <Media Include="RES\MOVE2.wav" />
+    <Media Include="RES\WIN.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
