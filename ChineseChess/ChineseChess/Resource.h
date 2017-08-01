@@ -7,39 +7,43 @@
 #define IDS_APP_TITLE                   103
 #define IDD_ABOUTBOX                    103
 #define IDM_ABOUT                       104
+#define IDS_ERROR_TITLE                 104
 #define IDM_EXIT                        105
+#define IDS_ERROR_CONTENT               105
 #define IDC_CHINESECHESS                109
+#define IDB_BOARD                       110
+#define IDB_SELECTED                    111
 #define IDR_MAINFRAME                   128
-#define IDB_BITMAP1                     130
-#define IDB_BITMAP2                     131
-#define IDB_BITMAP3                     132
-#define IDB_BITMAP4                     133
-#define IDB_BITMAP5                     134
-#define IDB_BITMAP6                     135
-#define IDB_BITMAP7                     136
-#define IDB_BITMAP8                     137
-#define IDR_WAVE1                       138
-#define IDR_WAVE2                       139
-#define IDR_WAVE3                       140
-#define IDR_WAVE4                       141
-#define IDI_ICON1                       142
-#define IDR_WAVE5                       143
-#define IDR_WAVE6                       144
-#define IDR_WAVE7                       145
-#define IDR_WAVE8                       146
-#define IDR_WAVE9                       147
-#define IDR_WAVE10                      148
-#define IDB_BITMAP9                     149
-#define IDB_BITMAP10                    150
-#define IDB_BITMAP11                    151
-#define IDB_BITMAP12                    152
-#define IDB_BITMAP13                    153
-#define IDB_BITMAP14                    154
-#define IDB_BITMAP15                    155
-#define IDB_BITMAP16                    156
-#define IDI_ICON2                       157
-#define IDR_WAVE11                      158
-#define IDI_ICON3                       159
+#define IDI_CHINESESCHESS               129
+#define IDB_RK                          208
+#define IDB_RA                          209
+#define IDB_RB                          210
+#define IDB_RN                          211
+#define IDB_RR                          212
+#define IDB_RC                          213
+#define IDB_RP                          214
+#define IDB_BK                          216
+#define IDB_BA                          217
+#define IDB_BB                          218
+#define IDB_BN                          219
+#define IDB_BR                          220
+#define IDB_BC                          221
+#define IDB_BP                          222
+#define IDR_CLICK                       300
+#define IDR_ILLEGAL                     301
+#define IDR_MOVE                        302
+#define IDR_MOVE2                       303
+#define IDR_CAPTURE                     304
+#define IDR_CAPTURE2                    305
+#define IDR_CHECK                       306
+#define IDR_CHECK2                      307
+#define IDR_WIN                         308
+#define IDR_DRAW                        309
+#define IDR_LOSS                        310
+#define IDI_SMALL                       410
+#define IDI_XQWIZARD                    411
+#define ID_32771                        32771
+#define ID_SETTING                      32772
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -47,9 +51,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        160
-#define _APS_NEXT_COMMAND_VALUE         32771
+#define _APS_NEXT_RESOURCE_VALUE        161
+#define _APS_NEXT_COMMAND_VALUE         32773
 #define _APS_NEXT_CONTROL_VALUE         1000
-#define _APS_NEXT_SYMED_VALUE           110
+#define _APS_NEXT_SYMED_VALUE           111
 #endif
 #endif
