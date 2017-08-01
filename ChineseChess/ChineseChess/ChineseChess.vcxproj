@@ -139,9 +139,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChineseChess.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChineseChess.cpp" />
