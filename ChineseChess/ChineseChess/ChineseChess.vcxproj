@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessApp.h" />
+    <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="ChineseChess.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Resource.h" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChessApp.cpp" />
+    <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="ChineseChess.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

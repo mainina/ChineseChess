@@ -167,7 +167,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
-		// TODO: 在此处添加使用 hdc 的任何绘图代码...
+		app.DrawBoard(hdc);
 		EndPaint(hWnd, &ps);
 	}
 	break;
