@@ -1,8 +1,13 @@
 #pragma once
+#include "Config.h"
+#include "ChessPiece.h"
+#include <vector>
+
 class ChessBoard
 {
 private:
 	HBITMAP bmpBoard;
+	std::vector<ChessPiece*> pieceVector;
 
 public:
 	ChessBoard();

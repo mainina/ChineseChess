@@ -42,6 +42,12 @@
     <ClInclude Include="ChessBoard.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ChessPiece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="KingPiece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -54,6 +60,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ChessBoard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ChessPiece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="KingPiece.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
