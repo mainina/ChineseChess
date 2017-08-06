@@ -171,6 +171,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		EndPaint(hWnd, &ps);
 	}
 	break;
+	case WM_LBUTTONDOWN:
+		x = (LOWORD(lParam) - BOARD_EDGE) / SQUARE_SIZE;
+		y = (HIWORD(lParam) - BOARD_EDGE) / SQUARE_SIZE;
+		if (x >= 0 && x <= MAX_COLUMN_NUM && y >= 0 && y <= MAX_ROW_NUM) {
+			//app.Click(x, y);
+		}
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;

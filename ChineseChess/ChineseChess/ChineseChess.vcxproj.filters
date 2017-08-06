@@ -48,6 +48,27 @@
     <ClInclude Include="KingPiece.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AdvisorPiece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BishopPiece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonPiece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightPiece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PawnPiece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RookPiece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -66,6 +87,27 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="KingPiece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AdvisorPiece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BishopPiece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonPiece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightPiece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PawnPiece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RookPiece.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

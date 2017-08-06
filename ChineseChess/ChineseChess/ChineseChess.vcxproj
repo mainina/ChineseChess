@@ -139,23 +139,37 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdvisorPiece.h" />
+    <ClInclude Include="BishopPiece.h" />
+    <ClInclude Include="CannonPiece.h" />
     <ClInclude Include="ChessApp.h" />
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="ChessPiece.h" />
     <ClInclude Include="ChineseChess.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="KingPiece.h" />
+    <ClInclude Include="KnightPiece.h" />
+    <ClInclude Include="PawnPiece.h" />
+    <ClInclude Include="PieceFactory.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="RookPiece.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AdvisorPiece.cpp" />
+    <ClCompile Include="BishopPiece.cpp" />
+    <ClCompile Include="CannonPiece.cpp" />
     <ClCompile Include="ChessApp.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
     <ClCompile Include="ChineseChess.cpp" />
     <ClCompile Include="KingPiece.cpp" />
+    <ClCompile Include="KnightPiece.cpp" />
+    <ClCompile Include="PawnPiece.cpp" />
+    <ClCompile Include="PieceFactory.cpp" />
+    <ClCompile Include="RookPiece.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
