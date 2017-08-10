@@ -53,9 +53,20 @@ void ChessApp::DrawSquare(POINT pieceLocation, BOOL bSelected = FALSE) {
 	}
 }
 
+void ChessApp::NotSelect(void)
+{
+	sqSelected.x = -1;
+	sqSelected.y = -1;
+}
+
 void ChessApp::Click(int x, int y)
 {
 	/***
 
 	***/
+}
+
+BOOL ChessApp::IsSelected(void)
+{
+	return sqSelected.x >= 0 && sqSelected.y >= 0;
 }

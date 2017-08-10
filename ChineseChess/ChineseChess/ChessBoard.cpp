@@ -90,3 +90,8 @@ HBITMAP ChessBoard::Bmp(void)
 {
 	return bmpBoard;
 }
+
+ChessPiece * ChessBoard::FindPiece(int x, int y)
+{
+	return nullptr;
+}

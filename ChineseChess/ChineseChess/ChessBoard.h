@@ -15,5 +15,6 @@ public:
 	void Startup(HINSTANCE hInstance);
 	HDC DrawBoard(HDC hdc);
 	HBITMAP Bmp(void);
+	ChessPiece* FindPiece(int x, int y);
 };
 
