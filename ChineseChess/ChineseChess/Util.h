@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Config.h"
 
-// 加载资源文件中的图片
 static HBITMAP LoadResBmp(HINSTANCE hInst, int nResId)
 {
 	return (HBITMAP) LoadImage(hInst, MAKEINTRESOURCE(nResId), IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE | LR_SHARED);

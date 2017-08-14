@@ -7,49 +7,48 @@
 
 #define MAX_LOADSTRING 100
 
-// 全局变量: 
-HINSTANCE hInst;                                // 当前实例
-WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
-WCHAR szWindowClass[MAX_LOADSTRING];            // 主窗口类名
+// 全局变量:
+TCHAR szTitle[MAX_LOADSTRING];					// 标题栏文本
+TCHAR szWindowClass[MAX_LOADSTRING];			// 主窗口类名
 
-// 此代码模块中包含的函数的前向声明: 
-ATOM                MyRegisterClass(HINSTANCE hInstance);
-BOOL                InitInstance(HINSTANCE, int);
-LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+// 此代码模块中包含的函数的前向声明:
+ATOM				MyRegisterClass(HINSTANCE hInstance);
+BOOL				InitInstance(HINSTANCE, int);
+LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
 static ChessApp app;
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-	_In_opt_ HINSTANCE hPrevInstance,
-	_In_ LPWSTR    lpCmdLine,
-	_In_ int       nCmdShow)
+int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
+					   _In_opt_ HINSTANCE hPrevInstance,
+					   _In_ LPTSTR    lpCmdLine,
+					   _In_ int       nCmdShow)
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: 在此放置代码。
+	MSG msg;
+	HACCEL hAccelTable;
 
 	app.hInst = hInstance;
 	app.Startup();
 
 	// 初始化全局字符串
-	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-	LoadStringW(hInstance, IDC_CHINESECHESS, szWindowClass, MAX_LOADSTRING);
+	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+	LoadString(hInstance, IDC_CHINESECHESS, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
 
-	// 执行应用程序初始化: 
-	if (!InitInstance(hInstance, nCmdShow))
+	// 执行应用程序初始化:
+	if (!InitInstance (hInstance, nCmdShow))
 	{
 		return FALSE;
 	}
 
-	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CHINESECHESS));
+	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CHINESECHESS));
 
-	MSG msg;
-
-	// 主消息循环: 
-	while (GetMessage(&msg, nullptr, 0, 0))
+	// 主消息循环:
+	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
 		{
@@ -58,7 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 	}
 
-	return (int)msg.wParam;
+	return (int) msg.wParam;
 }
 
 
@@ -70,23 +69,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
-	WNDCLASSEXW wcex;
+	WNDCLASSEX wcex;
 
 	wcex.cbSize = sizeof(WNDCLASSEX);
 
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = WndProc;
-	wcex.cbClsExtra = 0;
-	wcex.cbWndExtra = 0;
-	wcex.hInstance = hInstance;
-	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_XQWIZARD));
-	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_CHINESECHESS);
-	wcex.lpszClassName = szWindowClass;
-	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_XQWIZARD));
+	wcex.style			= CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc	= WndProc;
+	wcex.cbClsExtra		= 0;
+	wcex.cbWndExtra		= 0;
+	wcex.hInstance		= hInstance;
+	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
+	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
+	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_CHINESECHESS);
+	wcex.lpszClassName	= szWindowClass;
+	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_ICON1));
 
-	return RegisterClassExW(&wcex);
+	return RegisterClassEx(&wcex);
 }
 
 //
@@ -94,17 +93,16 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 //   目的: 保存实例句柄并创建主窗口
 //
-//   注释: 
+//   注释:
 //
 //        在此函数中，我们在全局变量中保存实例句柄并
 //        创建和显示主程序窗口。
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-	hInst = hInstance; // 将实例句柄存储在全局变量中
-
-	app.hWnd = CreateWindowW(szWindowClass, szTitle, WINDOW_STYLES,
-		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+	// WS_OVERLAPPEDWINDOW
+	app.hWnd = CreateWindow(szWindowClass, szTitle, WINDOW_STYLES,
+		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
 	if (!app.hWnd)
 	{
@@ -120,11 +118,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //  函数: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-//  目的:    处理主窗口的消息。
+//  目的: 处理主窗口的消息。
 //
-//  WM_COMMAND  - 处理应用程序菜单
-//  WM_PAINT    - 绘制主窗口
-//  WM_DESTROY  - 发送退出消息并返回
+//  WM_COMMAND	- 处理应用程序菜单
+//  WM_PAINT	- 绘制主窗口
+//  WM_DESTROY	- 发送退出消息并返回
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -144,16 +142,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		rect.right = rect.left + BOARD_WIDTH;
 		rect.bottom = rect.top + BOARD_HEIGHT;
 		AdjustWindowRect(&rect, WINDOW_STYLES, TRUE);
-		MoveWindow(hWnd, x, y, rect.right - rect.left, rect.bottom - rect.top, TRUE);
+		MoveWindow(hWnd, x, y, rect.right - rect.left,rect.bottom - rect.top, TRUE);
 		break;
 	case WM_COMMAND:
-	{
-		int wmId = LOWORD(wParam);
-		// 分析菜单选择: 
+		wmId    = LOWORD(wParam);
+		wmEvent = HIWORD(wParam);
+		// 分析菜单选择:
 		switch (wmId)
 		{
 		case IDM_ABOUT:
-			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+			DialogBox(app.hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
 			break;
 		case IDM_EXIT:
 			DestroyWindow(hWnd);
@@ -161,21 +159,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
-	}
-	break;
+		break;
 	case WM_PAINT:
-	{
-		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hWnd, &ps);
+		hdc = BeginPaint(hWnd, &ps);
+		// TODO: 在此添加任意绘图代码...
 		app.DrawBoard(hdc);
 		EndPaint(hWnd, &ps);
-	}
-	break;
+		break;
 	case WM_LBUTTONDOWN:
 		x = (LOWORD(lParam) - BOARD_EDGE) / SQUARE_SIZE;
 		y = (HIWORD(lParam) - BOARD_EDGE) / SQUARE_SIZE;
 		if (x >= 0 && x <= MAX_COLUMN_NUM && y >= 0 && y <= MAX_ROW_NUM) {
-			//app.Click(x, y);
+			app.Click(x, y);
 		}
 		break;
 	case WM_DESTROY:
