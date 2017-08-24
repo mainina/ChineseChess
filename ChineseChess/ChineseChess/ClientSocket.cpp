@@ -6,6 +6,7 @@
 #include "Protocal.h"
 #include "CommandDecoder.h"
 #include "ChessApp.h"
+#include "StartChessCmdData.h"
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "15010"
@@ -134,7 +135,7 @@ void ClientSocket::Run()
 				// apply
 				StartChessRec();
 
-				ChessApp::GetInstance()->Startup();
+				ChessApp::GetInstance()->Startup(((StartChessCmdData*)data)->GetSdPlayer());
 			}
 			delete cmdDecoder;
 		}

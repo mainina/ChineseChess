@@ -23,7 +23,7 @@ public:
 
 public:
 	static ChessApp* GetInstance();
-	void Startup(void);
+	void Startup(int);
 	void DrawBoard(HDC hdc);
 	void DrawSquare(POINT pieceLocation, BOOL bSelected);
 	void NotSelect(void);

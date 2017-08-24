@@ -14,7 +14,7 @@ public:
 	ChessBoard(void);
 	~ChessBoard(void);
 
-	void Startup(HINSTANCE hInstance);
+	void Startup(HINSTANCE hInstance, int iSdPlayer);
 	HDC DrawBoard(HDC hdc);
 	HBITMAP Bmp(void);
 	int SdPlayer(void);

@@ -4,6 +4,7 @@
 #include "Protocal.h"
 #include "SelectCmdData.h"
 #include "LoginCmdData.h"
+#include "StartChessCmdData.h"
 
 
 CommandDecoder::CommandDecoder(char bufRecv[]) :Decoder(bufRecv)
@@ -92,6 +93,12 @@ bool CommandDecoder::decode()
 			mCmdData->SetRec(false);
 		}
 		break;
+	case SCCommand:
+		mCmdData = new StartChessCmdData();
+		mCmdData->SetUserName(mData.at(1));
+		((StartChessCmdData*)mCmdData)->SetSdPlayer(atoi(mData.at(2).c_str()));
+		break;
+	case SCRCommand:
 	case SRRCommand:
 	case SDRCommand:
 	case GTWRCommand:

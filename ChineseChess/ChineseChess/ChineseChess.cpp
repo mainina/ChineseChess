@@ -172,7 +172,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case IDM_EXIT:
 			clientSocket.Close();
-			clientSocket.Destory();
 			DestroyWindow(hWnd);
 			break;
 		case IDB_START:
@@ -197,7 +196,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_DESTROY:
 		clientSocket.Close();
-		clientSocket.Destory();
 		PostQuitMessage(0);
 		break;
 	default:
@@ -277,7 +275,6 @@ INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 		if (LOWORD(wParam) == IDCANCEL)
 		{
 			clientSocket.Close();
-			clientSocket.Destory();
 			exit(0);
 			return (INT_PTR)TRUE;
 		}

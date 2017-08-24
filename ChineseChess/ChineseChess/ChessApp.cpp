@@ -32,10 +32,10 @@ ChessApp* ChessApp::GetInstance()
 	return instance;
 }
 
-void ChessApp::Startup(void)
+void ChessApp::Startup(int iSdPlayer)
 {
 	bmpSelected = LoadResBmp(hInst, IDB_SELECTED);
-	cBoard->Startup(hInst);
+	cBoard->Startup(hInst, iSdPlayer);
 	mvLast->Init();
 }
 

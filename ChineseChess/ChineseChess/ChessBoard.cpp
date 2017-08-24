@@ -23,9 +23,9 @@ ChessBoard::~ChessBoard(void)
 	}
 }
 
-void ChessBoard::Startup(HINSTANCE hInstance)
+void ChessBoard::Startup(HINSTANCE hInstance, int iSdPlayer)
 {
-	sdPlayer = RED;
+	sdPlayer = iSdPlayer;
 	bmpBoard = LoadResBmp(hInstance, IDB_BOARD);
 
 	for(int i = 0; i <= PIECE_PAWN; i++)
