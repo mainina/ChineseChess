@@ -150,10 +150,10 @@ void ClientSocket::Run()
 				Send(std::string(buff));
 
 				MoveCmdData* moveData = (MoveCmdData*)data;
-				MoveStep step(abs(9 - moveData->GetSrcX()),
-					abs(10 - moveData->GetSrcY()),
-					abs(9 - moveData->GetDestX()),
-					abs(10 - moveData->GetDestY()));
+				MoveStep step(abs(8 - moveData->GetSrcX()),
+					abs(9 - moveData->GetSrcY()),
+					abs(8 - moveData->GetDestX()),
+					abs(9 - moveData->GetDestY()));
 				ChessApp::GetInstance()->OtherFightMove(&step, moveData->GetSdPlayer());
 			}
 			delete cmdDecoder;
@@ -262,6 +262,8 @@ void ClientSocket::OnChessMoveEvent(MoveStep * step)
 		chEnd);
 
 	Send(std::string(buff));
+
+	ChessApp::GetInstance()->SetWaiting(true);
 }
 
 void ClientSocket::StartChessRec()

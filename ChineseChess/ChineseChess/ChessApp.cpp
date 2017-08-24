@@ -17,11 +17,11 @@ ChessApp::ChessApp(void)
 
 ChessApp::~ChessApp(void)
 {
-	if(cBoard != NULL)
+	if (cBoard != NULL)
 	{
 		delete cBoard;
 	}
-	if(mvLast != NULL)
+	if (mvLast != NULL)
 	{
 		delete mvLast;
 	}
@@ -93,8 +93,8 @@ void ChessApp::NotSelect(void)
 
 void ChessApp::DrawBoard(HDC hdc)
 {
-	HDC hdcTmp =	cBoard->DrawBoard(hdc);
-	if(IsSelected())
+	HDC hdcTmp = cBoard->DrawBoard(hdc);
+	if (IsSelected())
 	{
 		int xx = BOARD_EDGE + sqSelected.x * SQUARE_SIZE;
 		int yy = BOARD_EDGE + sqSelected.y * SQUARE_SIZE;
@@ -135,7 +135,7 @@ void ChessApp::ShowDialog(void)
 	LoadString(hInst, IDS_ERROR_CONTENT, errorTitle, 100);
 	TCHAR errorContent[100];
 	LoadString(hInst, IDS_ERROR_TITLE, errorContent, 100);
-	MessageBox(GetForegroundWindow(), errorTitle, errorContent, 1);  
+	MessageBox(GetForegroundWindow(), errorTitle, errorContent, 1);
 }
 
 void ChessApp::ClickOrMove(int x, int y)
@@ -192,7 +192,10 @@ void ChessApp::ClickOrMove(int x, int y)
 					cBoard->ChangeSide();
 
 					// send move command
-					onChessMoveEvent(mvLast);
+					if (!isWaiting)
+					{
+						onChessMoveEvent(mvLast);
+					}
 				}
 				else
 				{
@@ -219,7 +222,10 @@ void ChessApp::ClickOrMove(int x, int y)
 				cBoard->ChangeSide();
 
 				// send move command
-				onChessMoveEvent(mvLast);
+				if (!isWaiting)
+				{
+					onChessMoveEvent(mvLast);
+				}
 			}
 			else
 			{
