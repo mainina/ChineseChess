@@ -1,6 +1,9 @@
 #pragma once
 #include "ChessBoard.h"
 #include "LoginCmdData.h"
+#include <functional>
+
+using OnChessMoveEvent = std::function<void(MoveStep*)>;
 
 class ChessApp
 {
@@ -11,6 +14,8 @@ private:
 	static ChessApp* instance;
 	LoginCmdData user;
 	int sdPlayer;
+	OnChessMoveEvent onChessMoveEvent;
+	bool isWaiting;
 
 public:
 	HINSTANCE hInst;
@@ -32,8 +37,13 @@ public:
 	void SetUser(LoginCmdData* user);
 	LoginCmdData GetUser() { return user; }
 	int GetSdPlayer();
+	void AddChessMoveEvent(std::function<void(MoveStep*)>);
+	void OtherFightMove(MoveStep* step, int changeSide);
+	bool IsWaiting() { return isWaiting; }
+	void SetWaiting(bool val) { isWaiting = val; }
 
 private:
 	void ShowDialog(void);
+	void ClickOrMove(int x, int y);
 };
 

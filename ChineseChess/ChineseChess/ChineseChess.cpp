@@ -229,6 +229,7 @@ void LoginCallback(CmdData* cmdData)
 {
 	if (cmdData->IsOk())
 	{
+		app->AddChessMoveEvent(std::bind(&ClientSocket::OnChessMoveEvent,  &clientSocket, std::placeholders::_1));
 		app->SetUser((LoginCmdData*)cmdData);
 		EndDialog(loginDlg, TRUE);
 	}

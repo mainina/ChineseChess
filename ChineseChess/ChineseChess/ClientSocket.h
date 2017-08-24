@@ -5,6 +5,7 @@
 #include <string>
 #include <functional>
 #include "CmdData.h"
+#include "Config.h"
 
 using OnLoginCallback = std::function<void(CmdData*)>;
 
@@ -21,6 +22,7 @@ public:
 	void SelectRoom(std::string room);
 	void SelectRoomDesk(std::string room, std::string desk);
 	void GoToWar();
+	void OnChessMoveEvent(MoveStep* step);
 
 private:
 	OnLoginCallback loginCallback;

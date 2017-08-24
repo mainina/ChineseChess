@@ -122,7 +122,16 @@ void ServerHandler::Run()
 					}
 					else if (cmdDecoder->getCommand() == MCommand) // Move Comand
 					{
-						Forwarding(std::string("Move Command"));
+						// todo go to war
+						snprintf(buff, sizeof(buff), "%c%d,%s,%d%c", cmdDecoder->getChBegin(),
+							MRCommand,
+							data->GetUser().c_str(),
+							true,
+							cmdDecoder->getChEnd());
+						Forwarding(std::string(buff));
+
+						// send other fightMove
+						NotityMoveChess((MoveCmdData*)data);
 					}
 					else
 					{
@@ -184,6 +193,35 @@ int ServerHandler::StartChess(std::vector<std::string> fightUser)
 			continue;
 		}
 		sdPlay++;
+	}
+	return 0;
+}
+
+int ServerHandler::NotityMoveChess(MoveCmdData * cmdData)
+{
+	SOCKET fightUserSocket = ClientSocketStore::GetInstance()->FindOtherFighter(cmdData->GetRoom(),
+		cmdData->GetDesk(), cmdData->GetUser());
+	
+	char buff[BUF_SIZE];
+	ZeroMemory(buff, BUF_SIZE);
+	snprintf(buff, sizeof(buff), "%c%d,%s,%s,%s,%s,%d,%d,%d,%d,%d%c", chBegin, MCommand,
+		cmdData->GetUser().c_str(),
+		cmdData->GetToken().c_str(),
+		cmdData->GetRoom().c_str(),
+		cmdData->GetDesk().c_str(),
+		cmdData->GetSdPlayer(),
+		cmdData->GetSrcX(),
+		cmdData->GetSrcY(),
+		cmdData->GetDestX(),
+		cmdData->GetDestY(),
+		chEnd);
+	string cmd(buff);
+	int iResult = send(fightUserSocket, cmd.c_str(), (int)strlen(cmd.c_str()), 0);
+	if (iResult == SOCKET_ERROR) {
+		printf("send failed with error: %d\n", WSAGetLastError());
+		closesocket(clientSocket);
+		WSACleanup();
+		return 1;
 	}
 	return 0;
 }

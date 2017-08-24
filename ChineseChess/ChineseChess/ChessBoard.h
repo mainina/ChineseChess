@@ -19,6 +19,7 @@ public:
 	HBITMAP Bmp(void);
 	int SdPlayer(void);
 	void ChangeSide(void);
+	void ChangeSide(int iSdPlayer);
 	void DelPiece(int sqY, int sqX);
 	void MovePiece(MoveStep step);
 	void MakeMove(MoveStep step);

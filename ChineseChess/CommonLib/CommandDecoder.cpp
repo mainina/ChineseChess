@@ -5,6 +5,7 @@
 #include "SelectCmdData.h"
 #include "LoginCmdData.h"
 #include "StartChessCmdData.h"
+#include "MoveCmdData.h"
 
 
 CommandDecoder::CommandDecoder(char bufRecv[]) :Decoder(bufRecv)
@@ -98,6 +99,19 @@ bool CommandDecoder::decode()
 		mCmdData->SetUserName(mData.at(1));
 		((StartChessCmdData*)mCmdData)->SetSdPlayer(atoi(mData.at(2).c_str()));
 		break;
+	case MCommand:
+		mCmdData = new MoveCmdData();
+		mCmdData->SetUserName(mData.at(1));
+		mCmdData->SetToken(mData.at(2));
+		((MoveCmdData*)mCmdData)->SetRoom(mData.at(3));
+		((MoveCmdData*)mCmdData)->SetDesk(mData.at(4));
+		((MoveCmdData*)mCmdData)->SetSdPlayer(atoi(mData.at(5).c_str()));
+		((MoveCmdData*)mCmdData)->SetSrcX(atoi(mData.at(6).c_str()));
+		((MoveCmdData*)mCmdData)->SetSrcY(atoi(mData.at(7).c_str()));
+		((MoveCmdData*)mCmdData)->SetDestX(atoi(mData.at(8).c_str()));
+		((MoveCmdData*)mCmdData)->SetDestY(atoi(mData.at(9).c_str()));
+		break;
+	case MRCommand:
 	case SCRCommand:
 	case SRRCommand:
 	case SDRCommand:

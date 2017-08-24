@@ -110,6 +110,11 @@ void ChessBoard::ChangeSide(void)
 	sdPlayer = 1 - sdPlayer;
 }
 
+void ChessBoard::ChangeSide(int iSdPlayer)
+{
+	sdPlayer = iSdPlayer;
+}
+
 void ChessBoard::DelPiece(int sqY, int sqX)
 {
 	for(Vint::iterator it = pieceVector.begin(); it != pieceVector.end(); it++)

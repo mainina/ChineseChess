@@ -114,3 +114,19 @@ SOCKET ClientSocketStore::GetSocketBy(string userName)
 {
 	return userSocket[userName];
 }
+
+SOCKET ClientSocketStore::FindOtherFighter(string room, string desk, string userName)
+{
+	for (vector<RoomModel>::iterator it = rooms.begin(); it != rooms.end(); it++)
+	{
+		if (it->GetRoom() == room)
+		{
+			DeskModel* deskM = it->FindDeskBy(desk);
+			if (deskM != NULL)
+			{
+				return userSocket[deskM->FindOtherFight(userName)];
+			}
+		}
+	}
+	return NULL;
+}

@@ -10,8 +10,6 @@
 #include "SelectCmdData.h"
 #include "GameModel.h"
 
-using namespace std;
-
 class ClientSocketStore
 {
 public:
@@ -23,6 +21,7 @@ public:
 	bool IsLogin(string userName, string token);
 	DeskModel* Player(string room, string desk, string userName);
 	SOCKET GetSocketBy(string userName);
+	SOCKET FindOtherFighter(string room, string desk, string userName);
 
 private:
 	ClientSocketStore();

@@ -133,6 +133,7 @@
     <ClInclude Include="Decoder.h" />
     <ClInclude Include="GUIDGenertor.h" />
     <ClInclude Include="LoginCmdData.h" />
+    <ClInclude Include="MoveCmdData.h" />
     <ClInclude Include="Protocal.h" />
     <ClInclude Include="GameModel.h" />
     <ClInclude Include="SelectCmdData.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="CThread.cpp" />
     <ClCompile Include="Decoder.cpp" />
     <ClCompile Include="LoginCmdData.cpp" />
+    <ClCompile Include="MoveCmdData.cpp" />
     <ClCompile Include="SelectCmdData.cpp" />
     <ClCompile Include="StartChessCmdData.cpp" />
     <ClCompile Include="stdafx.cpp">

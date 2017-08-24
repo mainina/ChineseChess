@@ -11,6 +11,7 @@ ChessApp::ChessApp(void)
 	mvLast = new MoveStep(0, 0, 0, 0);
 	sqSelected.x = -1;
 	sqSelected.y = -1;
+	isWaiting = true;
 }
 
 
@@ -35,6 +36,15 @@ ChessApp* ChessApp::GetInstance()
 void ChessApp::Startup(int iSdPlayer)
 {
 	sdPlayer = iSdPlayer;
+	if (sdPlayer == RED)
+	{
+		isWaiting = false;
+	}
+	else
+	{
+		isWaiting = true;
+	}
+
 	bmpSelected = LoadResBmp(hInst, IDB_SELECTED);
 	cBoard->Startup(hInst, iSdPlayer);
 	mvLast->Init();
@@ -57,6 +67,22 @@ void ChessApp::SetUser(LoginCmdData * iUser)
 int ChessApp::GetSdPlayer()
 {
 	return this->sdPlayer;
+}
+
+void ChessApp::AddChessMoveEvent(std::function<void(MoveStep*)> callback)
+{
+	if (this->onChessMoveEvent == NULL)
+	{
+		this->onChessMoveEvent = callback;
+	}
+}
+
+void ChessApp::OtherFightMove(MoveStep * step, int changeSide)
+{
+	cBoard->ChangeSide(changeSide);
+	ClickOrMove(step->src.x, step->src.y);
+	ClickOrMove(step->dest.x, step->dest.y);
+	isWaiting = false;
 }
 
 void ChessApp::NotSelect(void)
@@ -97,18 +123,35 @@ void ChessApp::DrawSquare(POINT pieceLocation, BOOL bSelected = FALSE) {
 
 void ChessApp::Click(int x, int y)
 {
+	if (!isWaiting)
+	{
+		ClickOrMove(x, y);
+	}
+}
+
+void ChessApp::ShowDialog(void)
+{
+	TCHAR errorTitle[100];
+	LoadString(hInst, IDS_ERROR_CONTENT, errorTitle, 100);
+	TCHAR errorContent[100];
+	LoadString(hInst, IDS_ERROR_TITLE, errorContent, 100);
+	MessageBox(GetForegroundWindow(), errorTitle, errorContent, 1);  
+}
+
+void ChessApp::ClickOrMove(int x, int y)
+{
 	ChessPiece* piece = cBoard->FindPiece(x, y);
 	ChessPiece* selectedPiece = cBoard->FindPiece(sqSelected.x, sqSelected.y);
 	// 如果选择的子，是对方的
-	if(piece != NULL && piece->Color() != cBoard->SdPlayer())
+	if (piece != NULL && piece->Color() != cBoard->SdPlayer())
 	{
 		// 如果没有点击子，　或者已点击的子不是已方子
-		if(!(selectedPiece != NULL && selectedPiece->Color() == cBoard->SdPlayer()))
+		if (!(selectedPiece != NULL && selectedPiece->Color() == cBoard->SdPlayer()))
 		{
 			return;
 		}
 	}
-	if(piece == NULL && selectedPiece != NULL && selectedPiece->Color() != cBoard->SdPlayer())
+	if (piece == NULL && selectedPiece != NULL && selectedPiece->Color() != cBoard->SdPlayer())
 	{
 		return;
 	}
@@ -116,22 +159,23 @@ void ChessApp::Click(int x, int y)
 	hdc = GetDC(hWnd);
 	hdcTmp = CreateCompatibleDC(hdc);
 
-	if(IsSelected())
+	if (IsSelected())
 	{
 		// 选择的位置有子
-		if(piece != NULL)
+		if (piece != NULL)
 		{
 			// 选择是自己的子
-			if(piece->Color() == cBoard->SdPlayer())
+			if (piece->Color() == cBoard->SdPlayer())
 			{
 				DrawSquare(sqSelected);
 				sqSelected.x = x;
 				sqSelected.y = y;
 				DrawSquare(sqSelected, IsSelected());
-			}else{
+			}
+			else {
 				// 对方
 				MoveStep step(sqSelected.x, sqSelected.y, x, y);
-				if(selectedPiece->Check(&step)){
+				if (selectedPiece->Check(&step)) {
 					cBoard->DelPiece(y, x);
 					selectedPiece->SetLocation(x, y);
 					DrawSquare(sqSelected, TRUE);
@@ -140,21 +184,25 @@ void ChessApp::Click(int x, int y)
 					sqSelected.y = y;
 					DrawSquare(sqSelected, TRUE);
 
-					if(!mvLast->IsInit())
+					if (!mvLast->IsInit())
 					{
 						DrawSquare(mvLast->src);
 					}
 					mvLast->SetStep(step);
 					cBoard->ChangeSide();
+
+					// send move command
+					onChessMoveEvent(mvLast);
 				}
 				else
 				{
 					ShowDialog();
 				}
 			}
-		}else{ // 选择的位置没有子
+		}
+		else { // 选择的位置没有子
 			MoveStep step(sqSelected.x, sqSelected.y, x, y);
-			if(selectedPiece->Check(&step)){
+			if (selectedPiece->Check(&step)) {
 
 				selectedPiece->SetLocation(x, y);
 				DrawSquare(sqSelected, TRUE);
@@ -163,12 +211,15 @@ void ChessApp::Click(int x, int y)
 				sqSelected.y = y;
 				DrawSquare(sqSelected, TRUE);
 
-				if(!mvLast->IsInit())
+				if (!mvLast->IsInit())
 				{
 					DrawSquare(mvLast->src);
 				}
 				mvLast->SetStep(step);
 				cBoard->ChangeSide();
+
+				// send move command
+				onChessMoveEvent(mvLast);
 			}
 			else
 			{
@@ -179,7 +230,7 @@ void ChessApp::Click(int x, int y)
 	else
 	{
 		//　还没有选中任何子
-		if(piece != NULL && piece->Color() == cBoard->SdPlayer())
+		if (piece != NULL && piece->Color() == cBoard->SdPlayer())
 		{
 			sqSelected.x = x;
 			sqSelected.y = y;
@@ -189,13 +240,4 @@ void ChessApp::Click(int x, int y)
 
 	DeleteDC(hdcTmp);
 	ReleaseDC(hWnd, hdc);
-}
-
-void ChessApp::ShowDialog(void)
-{
-	TCHAR errorTitle[100];
-	LoadString(hInst, IDS_ERROR_CONTENT, errorTitle, 100);
-	TCHAR errorContent[100];
-	LoadString(hInst, IDS_ERROR_TITLE, errorContent, 100);
-	MessageBox(GetForegroundWindow(), errorTitle, errorContent, 1);  
 }

@@ -2,6 +2,7 @@
 #include "CThread.h"
 #include <functional>
 #include <vector>
+#include "MoveCmdData.h"
 
 using OnDisconnectEvent = std::function<void(CThread*)>;
 
@@ -15,6 +16,7 @@ public:
 	int Stop();
 	int Forwarding(std::string cmd);
 	int StartChess(std::vector<std::string> fightUser);
+	int NotityMoveChess(MoveCmdData* cmdData);
 
 private:
 	SOCKET clientSocket;

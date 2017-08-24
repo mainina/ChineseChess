@@ -7,6 +7,7 @@
 #include "CommandDecoder.h"
 #include "ChessApp.h"
 #include "StartChessCmdData.h"
+#include "MoveCmdData.h"
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "15010"
@@ -137,6 +138,24 @@ void ClientSocket::Run()
 
 				ChessApp::GetInstance()->Startup(((StartChessCmdData*)data)->GetSdPlayer());
 			}
+			else if (cmdDecoder->getCommand() == MCommand)
+			{
+				char buff[512];
+				ZeroMemory(buff, 512);
+				snprintf(buff, sizeof(buff), "%c%d,%s,%d%c", chBegin,
+					MRCommand,
+					ChessApp::GetInstance()->GetUser().GetUser().c_str(),
+					true,
+					chEnd);
+				Send(std::string(buff));
+
+				MoveCmdData* moveData = (MoveCmdData*)data;
+				MoveStep step(abs(9 - moveData->GetSrcX()),
+					abs(10 - moveData->GetSrcY()),
+					abs(9 - moveData->GetDestX()),
+					abs(10 - moveData->GetDestY()));
+				ChessApp::GetInstance()->OtherFightMove(&step, moveData->GetSdPlayer());
+			}
 			delete cmdDecoder;
 		}
 	} while (iResult > 0);
@@ -201,7 +220,7 @@ void ClientSocket::SelectRoomDesk(std::string room, std::string desk)
 {
 	char buff[512];
 	ZeroMemory(buff, 512);
-	snprintf(buff, sizeof(buff), "%c%d,%s,%s,%s,%s%c", chBegin, SDCommand, 
+	snprintf(buff, sizeof(buff), "%c%d,%s,%s,%s,%s%c", chBegin, SDCommand,
 		ChessApp::GetInstance()->GetUser().GetUser().c_str(),
 		ChessApp::GetInstance()->GetUser().GetToken().c_str(),
 		room.c_str(),
@@ -221,8 +240,28 @@ void ClientSocket::GoToWar()
 		ROOM_NAME,
 		DESK_NAME,
 		chEnd);
-	std::string cmd = buff;
-	Send(cmd);
+
+	Send(std::string(buff));
+}
+
+// Move Data-->userName,token,room,desk,sdPlayer,srcX,srcY,destX,destY
+void ClientSocket::OnChessMoveEvent(MoveStep * step)
+{
+	char buff[512];
+	ZeroMemory(buff, 512);
+	snprintf(buff, sizeof(buff), "%c%d,%s,%s,%s,%s,%d,%d,%d,%d,%d%c", chBegin, MCommand,
+		ChessApp::GetInstance()->GetUser().GetUser().c_str(),
+		ChessApp::GetInstance()->GetUser().GetToken().c_str(),
+		ROOM_NAME,
+		DESK_NAME,
+		ChessApp::GetInstance()->GetSdPlayer(),
+		step->src.x,
+		step->src.y,
+		step->dest.x,
+		step->dest.y,
+		chEnd);
+
+	Send(std::string(buff));
 }
 
 void ClientSocket::StartChessRec()
@@ -234,4 +273,6 @@ void ClientSocket::StartChessRec()
 		ChessApp::GetInstance()->GetUser().GetUser().c_str(),
 		true,
 		chEnd);
+
+	Send(std::string(buff));
 }

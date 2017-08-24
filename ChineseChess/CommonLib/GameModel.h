@@ -73,6 +73,19 @@ public:
 		return false;
 	}
 
+	string FindOtherFight(string userName)
+	{
+		// make sure only two user
+		for (unordered_map<string, bool>::iterator it = placards.begin(); it != placards.end(); it++)
+		{
+			if (it->first != userName)
+			{
+				return it->first;
+			}
+		}
+		return NULL;
+	}
+
 private:
 	string desk;
 	vector<string> users;
