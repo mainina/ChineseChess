@@ -69,6 +69,9 @@
     <ClInclude Include="RookPiece.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ClientSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -108,6 +111,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="RookPiece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSocket.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -92,7 +92,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>Msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msimg32.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -147,6 +147,7 @@
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="ChessPiece.h" />
     <ClInclude Include="ChineseChess.h" />
+    <ClInclude Include="ClientSocket.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="KingPiece.h" />
     <ClInclude Include="KnightPiece.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
     <ClCompile Include="ChineseChess.cpp" />
+    <ClCompile Include="ClientSocket.cpp" />
     <ClCompile Include="KingPiece.cpp" />
     <ClCompile Include="KnightPiece.cpp" />
     <ClCompile Include="PawnPiece.cpp" />
@@ -214,6 +216,11 @@
     <Media Include="RES\MOVE.wav" />
     <Media Include="RES\MOVE2.wav" />
     <Media Include="RES\WIN.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLib\CommonLib.vcxproj">
+      <Project>{6cc9b4d6-2c90-4265-bb90-917d5d712409}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
