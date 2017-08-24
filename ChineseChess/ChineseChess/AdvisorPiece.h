@@ -1,6 +1,7 @@
 #pragma once
 #include "chesspiece.h"
 #include <vector>
+#include "ChessBoard.h"
 
 class AdvisorPiece :
 	public ChessPiece

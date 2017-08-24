@@ -3,7 +3,6 @@
 #include "resource.h"
 #include "AdvisorPiece.h"
 
-
 AdvisorPiece::AdvisorPiece(ChessBoard* board)
 	:ChessPiece(board)
 {
@@ -18,17 +17,21 @@ AdvisorPiece::AdvisorPiece(ChessBoard* board, HINSTANCE hInst, int color)
 	{
 		name = "Ê¿";
 		bmpPiece = LoadResBmp(hInst, IDB_BA);
-
-		location.x = 3;
-		location.y = 0;
 	}
 	else
 	{
 		name = "ÊË";
 		bmpPiece = LoadResBmp(hInst, IDB_RA);
-
+	}
+	if (board->SdPlayer() == BACK)
+	{
 		location.x = 3;
 		location.y = 9;
+	}
+	else
+	{
+		location.x = 3;
+		location.y = 0;
 	}
 }
 

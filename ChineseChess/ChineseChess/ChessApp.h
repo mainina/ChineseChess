@@ -10,7 +10,7 @@ private:
 	~ChessApp(void);
 	static ChessApp* instance;
 	LoginCmdData user;
-
+	int sdPlayer;
 
 public:
 	HINSTANCE hInst;
@@ -31,6 +31,7 @@ public:
 	BOOL IsSelected(void);
 	void SetUser(LoginCmdData* user);
 	LoginCmdData GetUser() { return user; }
+	int GetSdPlayer();
 
 private:
 	void ShowDialog(void);

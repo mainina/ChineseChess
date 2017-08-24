@@ -34,6 +34,7 @@ ChessApp* ChessApp::GetInstance()
 
 void ChessApp::Startup(int iSdPlayer)
 {
+	sdPlayer = iSdPlayer;
 	bmpSelected = LoadResBmp(hInst, IDB_SELECTED);
 	cBoard->Startup(hInst, iSdPlayer);
 	mvLast->Init();
@@ -48,6 +49,11 @@ void ChessApp::SetUser(LoginCmdData * iUser)
 {
 	user.SetUserName(iUser->GetUser());
 	user.SetToken(iUser->GetToken());
+}
+
+int ChessApp::GetSdPlayer()
+{
+	return this->sdPlayer;
 }
 
 void ChessApp::NotSelect(void)
