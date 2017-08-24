@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{85D8E09C-C88E-4D91-96BA-1ED3CCDE5FE1}</ProjectGuid>
+    <ProjectGuid>{430C0911-B9D5-4D98-9828-4BA4FA14F25D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ChineseChess</RootNamespace>
+    <RootNamespace>Server</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -87,12 +87,12 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\UVS2017\Source\Repos\ChineseChess\ChineseChess\CommonLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>Msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>Ws2_32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -100,10 +100,10 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,10 +113,10 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
@@ -128,10 +128,10 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
@@ -140,37 +140,17 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdvisorPiece.h" />
-    <ClInclude Include="BishopPiece.h" />
-    <ClInclude Include="CannonPiece.h" />
-    <ClInclude Include="ChessApp.h" />
-    <ClInclude Include="ChessBoard.h" />
-    <ClInclude Include="ChessPiece.h" />
-    <ClInclude Include="ChineseChess.h" />
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="KingPiece.h" />
-    <ClInclude Include="KnightPiece.h" />
-    <ClInclude Include="PawnPiece.h" />
-    <ClInclude Include="PieceFactory.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="RookPiece.h" />
+    <ClInclude Include="ClientSocketStore.h" />
+    <ClInclude Include="ServerHandler.h" />
+    <ClInclude Include="ServerSocket.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AdvisorPiece.cpp" />
-    <ClCompile Include="BishopPiece.cpp" />
-    <ClCompile Include="CannonPiece.cpp" />
-    <ClCompile Include="ChessApp.cpp" />
-    <ClCompile Include="ChessBoard.cpp" />
-    <ClCompile Include="ChessPiece.cpp" />
-    <ClCompile Include="ChineseChess.cpp" />
-    <ClCompile Include="KingPiece.cpp" />
-    <ClCompile Include="KnightPiece.cpp" />
-    <ClCompile Include="PawnPiece.cpp" />
-    <ClCompile Include="PieceFactory.cpp" />
-    <ClCompile Include="RookPiece.cpp" />
+    <ClCompile Include="ClientSocketStore.cpp" />
+    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="ServerHandler.cpp" />
+    <ClCompile Include="ServerSocket.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -179,41 +159,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ChineseChess.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="RES\BA.bmp" />
-    <Image Include="RES\BB.bmp" />
-    <Image Include="RES\BC.bmp" />
-    <Image Include="RES\BK.bmp" />
-    <Image Include="RES\BN.bmp" />
-    <Image Include="RES\BOARD.bmp" />
-    <Image Include="RES\BP.bmp" />
-    <Image Include="RES\BR.bmp" />
-    <Image Include="RES\ChineseChess.ico" />
-    <Image Include="RES\RA.bmp" />
-    <Image Include="RES\RB.bmp" />
-    <Image Include="RES\RC.bmp" />
-    <Image Include="RES\RK.bmp" />
-    <Image Include="RES\RN.bmp" />
-    <Image Include="RES\RP.bmp" />
-    <Image Include="RES\RR.bmp" />
-    <Image Include="RES\SELECTED.bmp" />
-    <Image Include="RES\small.ico" />
-    <Image Include="RES\XQWIZARD.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="RES\CAPTURE.wav" />
-    <Media Include="RES\CAPTURE2.wav" />
-    <Media Include="RES\CHECK.wav" />
-    <Media Include="RES\CHECK2.wav" />
-    <Media Include="RES\CLICK.wav" />
-    <Media Include="RES\DRAW.wav" />
-    <Media Include="RES\ILLEGAL.wav" />
-    <Media Include="RES\LOSS.wav" />
-    <Media Include="RES\MOVE.wav" />
-    <Media Include="RES\MOVE2.wav" />
-    <Media Include="RES\WIN.wav" />
+    <ProjectReference Include="..\CommonLib\CommonLib.vcxproj">
+      <Project>{6cc9b4d6-2c90-4265-bb90-917d5d712409}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
