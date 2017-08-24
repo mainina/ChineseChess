@@ -5,10 +5,13 @@
 #include <stdio.h>
 #include "Protocal.h"
 #include "CommandDecoder.h"
+#include "ChessApp.h"
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "15010"
 #define SERVER_IP "127.0.0.1"
+#define ROOM_NAME "Hight Level"
+#define DESK_NAME "Desk01"
 
 ClientSocket::ClientSocket()
 {
@@ -111,21 +114,19 @@ void ClientSocket::Run()
 			CmdData* data = cmdDecoder->getData();
 			if (cmdDecoder->getCommand() == LRCommand)
 			{
-				char buff[512];
-				ZeroMemory(buff, 512);
-				snprintf(buff, sizeof(buff), "%c%d,%s,%s,room101%c", cmdDecoder->getChBegin(), SRCommand, data->GetUser().c_str(),data->GetToken().c_str(), cmdDecoder->getChEnd());
-				std::string cmd = buff;
-				Send(cmd);
+				loginCallback(data);
+				// select room
+				if (data->IsOk())
+				{
+					SelectRoom(ROOM_NAME);
+				}
 			}
 			else if (cmdDecoder->getCommand() == SRRCommand)
 			{
+				// select desk of room
 				if (data->IsOk())
 				{
-					char buff[512];
-					ZeroMemory(buff, 512);
-					snprintf(buff, sizeof(buff), "%c%d,%s,%s,room101,desk01%c", cmdDecoder->getChBegin(), SDCommand, data->GetUser().c_str(), data->GetToken().c_str(), cmdDecoder->getChEnd());
-					std::string cmd = buff;
-					Send(cmd);
+					SelectRoomDesk(ROOM_NAME, DESK_NAME);
 				}
 			}
 			delete cmdDecoder;
@@ -159,4 +160,45 @@ void ClientSocket::Close()
 	// cleanup
 	closesocket(mSocket);
 	WSACleanup();
+}
+
+void ClientSocket::Login(std::string userName, std::string password, std::function<void(CmdData*)> callback)
+{
+	if (this->loginCallback == NULL)
+	{
+		this->loginCallback = callback;
+	}
+	char buff[512];
+	ZeroMemory(buff, 512);
+	snprintf(buff, sizeof(buff), "%c%d,%s,%s,%c", chBegin, LCommand, userName.c_str(), password.c_str(), chEnd);
+	std::string cmd = buff;
+	Send(cmd);
+}
+
+void ClientSocket::SelectRoom(std::string room)
+{
+	char buff[512];
+	ZeroMemory(buff, 512);
+
+	snprintf(buff, sizeof(buff), "%c%d,%s,%s,%s%c", chBegin, SRCommand,
+		ChessApp::GetInstance()->GetUser().GetUser().c_str(),
+		ChessApp::GetInstance()->GetUser().GetToken().c_str(),
+		room.c_str(),
+		chEnd);
+	std::string cmd = buff;
+	Send(cmd);
+}
+
+void ClientSocket::SelectRoomDesk(std::string room, std::string desk)
+{
+	char buff[512];
+	ZeroMemory(buff, 512);
+	snprintf(buff, sizeof(buff), "%c%d,%s,%s,%s,%s%c", chBegin, SDCommand, 
+		ChessApp::GetInstance()->GetUser().GetUser().c_str(),
+		ChessApp::GetInstance()->GetUser().GetToken().c_str(),
+		room.c_str(),
+		desk.c_str(),
+		chEnd);
+	std::string cmd = buff;
+	Send(cmd);
 }

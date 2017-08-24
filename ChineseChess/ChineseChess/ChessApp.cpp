@@ -26,6 +26,12 @@ ChessApp::~ChessApp(void)
 	}
 }
 
+ChessApp* ChessApp::instance = new ChessApp();
+ChessApp* ChessApp::GetInstance()
+{
+	return instance;
+}
+
 void ChessApp::Startup(void)
 {
 	bmpSelected = LoadResBmp(hInst, IDB_SELECTED);
@@ -36,6 +42,12 @@ void ChessApp::Startup(void)
 BOOL ChessApp::IsSelected(void)
 {
 	return sqSelected.x >= 0 && sqSelected.y >= 0;
+}
+
+void ChessApp::SetUser(LoginCmdData * iUser)
+{
+	user.SetUserName(iUser->GetUser());
+	user.SetToken(iUser->GetToken());
 }
 
 void ChessApp::NotSelect(void)

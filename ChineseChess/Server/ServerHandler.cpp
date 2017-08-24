@@ -79,10 +79,9 @@ void ServerHandler::Run()
 					{
 						store->AddUserToRoom(((SelectCmdData*)data)->GetRoom(), data->GetUser());
 
-						snprintf(buff, sizeof(buff), "%c%d,%s,%s,%d%c", cmdDecoder->getChBegin(),
+						snprintf(buff, sizeof(buff), "%c%d,%s,%d%c", cmdDecoder->getChBegin(),
 							SRRCommand,
 							data->GetUser().c_str(),
-							data->GetToken().c_str(),
 							true,
 							cmdDecoder->getChEnd());
 						Forwarding(std::string(buff));
@@ -93,10 +92,9 @@ void ServerHandler::Run()
 							((SelectCmdData*)data)->GetDesk(),
 							data->GetUser());
 
-						snprintf(buff, sizeof(buff), "%c%d,%s,%s,%d%c", cmdDecoder->getChBegin(),
+						snprintf(buff, sizeof(buff), "%c%d,%s,%d%c", cmdDecoder->getChBegin(),
 							SDRCommand,
 							data->GetUser().c_str(),
-							data->GetToken().c_str(),
 							true,
 							cmdDecoder->getChEnd());
 						Forwarding(std::string(buff));

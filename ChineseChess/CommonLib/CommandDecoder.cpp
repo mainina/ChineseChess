@@ -73,12 +73,23 @@ bool CommandDecoder::decode()
 		((SelectCmdData*)mCmdData)->SetDesk(mData.at(4));
 		break;
 	case LRCommand:
+		mCmdData = new CmdData();
+		mCmdData->SetUserName(mData.at(1));
+		mCmdData->SetToken(mData.at(2));
+		if (mData.size() > 3 && mData.at(3)[0] == '1')
+		{
+			mCmdData->SetRec(true);
+		}
+		else
+		{
+			mCmdData->SetRec(false);
+		}
+		break;
 	case SRRCommand:
 	case SDRCommand:
 		mCmdData = new CmdData();
 		mCmdData->SetUserName(mData.at(1));
-		mCmdData->SetToken(mData.at(2));
-		if (mData.at(3)[0] == '1')
+		if (mData.size() > 2 && mData.at(2)[0] == '1')
 		{
 			mCmdData->SetRec(true);
 		}
