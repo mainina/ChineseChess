@@ -23,5 +23,12 @@ enum CmdType
 	// Start Chess Rec Command
 	SCRCommand = 5002,
 	// Authorize Error Command
-	AECommand = 6001
+	AECommand = 6001,
+	// go to war command
+	GTWCommand = 7001,
+	// go to war rec command
+	GTWRCommand = 7002
 };
+
+const char chBegin = 0x02;
+const char chEnd = 0x03;

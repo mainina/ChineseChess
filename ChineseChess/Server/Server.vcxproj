@@ -163,6 +163,9 @@
       <Project>{6cc9b4d6-2c90-4265-bb90-917d5d712409}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="protocal" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

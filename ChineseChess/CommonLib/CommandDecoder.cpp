@@ -72,6 +72,13 @@ bool CommandDecoder::decode()
 		((SelectCmdData*)mCmdData)->SetRoom(mData.at(3));
 		((SelectCmdData*)mCmdData)->SetDesk(mData.at(4));
 		break;
+	case GTWCommand:
+		mCmdData = new SelectCmdData();
+		mCmdData->SetUserName(mData.at(1));
+		mCmdData->SetToken(mData.at(2));
+		((SelectCmdData*)mCmdData)->SetRoom(mData.at(3));
+		((SelectCmdData*)mCmdData)->SetDesk(mData.at(4));
+		break;
 	case LRCommand:
 		mCmdData = new CmdData();
 		mCmdData->SetUserName(mData.at(1));
@@ -87,6 +94,7 @@ bool CommandDecoder::decode()
 		break;
 	case SRRCommand:
 	case SDRCommand:
+	case GTWRCommand:
 		mCmdData = new CmdData();
 		mCmdData->SetUserName(mData.at(1));
 		if (mData.size() > 2 && mData.at(2)[0] == '1')

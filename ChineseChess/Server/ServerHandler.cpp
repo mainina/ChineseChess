@@ -99,6 +99,27 @@ void ServerHandler::Run()
 							cmdDecoder->getChEnd());
 						Forwarding(std::string(buff));
 					}
+					else if (cmdDecoder->getCommand() == GTWCommand)
+					{
+						// todo go to war
+						snprintf(buff, sizeof(buff), "%c%d,%s,%d%c", cmdDecoder->getChBegin(),
+							GTWRCommand,
+							data->GetUser().c_str(),
+							true,
+							cmdDecoder->getChEnd());
+						Forwarding(std::string(buff));
+
+						// can start
+						DeskModel* deskModel = store->Player(((SelectCmdData*)data)->GetRoom(),
+							((SelectCmdData*)data)->GetDesk(),
+							data->GetUser());
+						vector<string> fightUser;
+						if (deskModel != NULL && deskModel->IsCanFight(&fightUser))
+						{
+							// start chess command
+							StartChess(fightUser);
+						}
+					}
 					else if (cmdDecoder->getCommand() == MCommand) // Move Comand
 					{
 						Forwarding(std::string("Move Command"));
@@ -142,5 +163,28 @@ int ServerHandler::Forwarding(std::string cmd)
 		return 1;
 	}
 	return iResult;
+}
+
+int ServerHandler::StartChess(std::vector<std::string> fightUser)
+{
+	char buff[BUF_SIZE];
+	int sdPlay = 1;
+	for (vector<string>::iterator it = fightUser.begin(); it != fightUser.end(); it++)
+	{
+		SOCKET fightUserSocket = ClientSocketStore::GetInstance()->GetSocketBy((*it));
+		ZeroMemory(buff, BUF_SIZE);
+		snprintf(buff, sizeof(buff), "%c%d,%s,%d%c", chBegin,
+			SCCommand, it->c_str(), sdPlay % 2, chEnd);
+		string cmd(buff);
+		int iResult = send(fightUserSocket, cmd.c_str(), (int)strlen(cmd.c_str()), 0);
+		if (iResult == SOCKET_ERROR) {
+			printf("send failed with error: %d\n", WSAGetLastError());
+			closesocket(clientSocket);
+			WSACleanup();
+			continue;
+		}
+		sdPlay++;
+	}
+	return 0;
 }
 

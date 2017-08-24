@@ -38,7 +38,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	HACCEL hAccelTable;
 
 	app->hInst = hInstance;
-	app->Startup();
+	//app->Startup();
 
 	// 初始化全局字符串
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -171,7 +171,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			DialogBox(app->hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
 			break;
 		case IDM_EXIT:
+			clientSocket.Close();
+			clientSocket.Destory();
 			DestroyWindow(hWnd);
+			break;
+		case IDB_START:
+			clientSocket.GoToWar();
 			break;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
@@ -191,6 +196,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_DESTROY:
+		clientSocket.Close();
+		clientSocket.Destory();
 		PostQuitMessage(0);
 		break;
 	default:
@@ -269,6 +276,8 @@ INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		if (LOWORD(wParam) == IDCANCEL)
 		{
+			clientSocket.Close();
+			clientSocket.Destory();
 			exit(0);
 			return (INT_PTR)TRUE;
 		}

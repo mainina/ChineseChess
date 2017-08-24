@@ -20,11 +20,15 @@ public:
 	void Login(std::string userName, std::string password, std::function<void(CmdData*)> callback);
 	void SelectRoom(std::string room);
 	void SelectRoomDesk(std::string room, std::string desk);
+	void GoToWar();
 
 private:
 	OnLoginCallback loginCallback;
 	SOCKET mSocket;
 	const char chBegin = 0x02;
 	const char chEnd = 0x03;
+
+private:
+	void StartChessRec();
 };
 

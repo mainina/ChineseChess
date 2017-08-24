@@ -92,3 +92,25 @@ bool ClientSocketStore::IsLogin(string userName, string token)
 	}
 	return false;
 }
+
+DeskModel* ClientSocketStore::Player(string room, string desk, string userName)
+{
+	for (vector<RoomModel>::iterator it = rooms.begin(); it != rooms.end(); it++)
+	{
+		if (it->GetRoom() == room)
+		{
+			DeskModel* deskM = it->FindDeskBy(desk);
+			if (deskM != NULL)
+			{
+				deskM->GoToWar(userName);
+				return deskM;
+			}
+		}
+	}
+	return NULL;
+}
+
+SOCKET ClientSocketStore::GetSocketBy(string userName)
+{
+	return userSocket[userName];
+}

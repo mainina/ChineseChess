@@ -129,6 +129,13 @@ void ClientSocket::Run()
 					SelectRoomDesk(ROOM_NAME, DESK_NAME);
 				}
 			}
+			else if (cmdDecoder->getCommand() == SCCommand)
+			{
+				// apply
+				StartChessRec();
+
+				ChessApp::GetInstance()->Startup();
+			}
 			delete cmdDecoder;
 		}
 	} while (iResult > 0);
@@ -201,4 +208,29 @@ void ClientSocket::SelectRoomDesk(std::string room, std::string desk)
 		chEnd);
 	std::string cmd = buff;
 	Send(cmd);
+}
+
+void ClientSocket::GoToWar()
+{
+	char buff[512];
+	ZeroMemory(buff, 512);
+	snprintf(buff, sizeof(buff), "%c%d,%s,%s,%s,%s%c", chBegin, GTWCommand,
+		ChessApp::GetInstance()->GetUser().GetUser().c_str(),
+		ChessApp::GetInstance()->GetUser().GetToken().c_str(),
+		ROOM_NAME,
+		DESK_NAME,
+		chEnd);
+	std::string cmd = buff;
+	Send(cmd);
+}
+
+void ClientSocket::StartChessRec()
+{
+	char buff[512];
+	ZeroMemory(buff, 512);
+	snprintf(buff, sizeof(buff), "%c%d,%s,%d%c", chBegin,
+		SCRCommand,
+		ChessApp::GetInstance()->GetUser().GetUser().c_str(),
+		true,
+		chEnd);
 }

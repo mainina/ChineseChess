@@ -21,6 +21,8 @@ public:
 	void AddUserToRoom(std::string room, std::string userName);
 	void AddUserToRoomDesk(std::string room, string desk, std::string userName);
 	bool IsLogin(string userName, string token);
+	DeskModel* Player(string room, string desk, string userName);
+	SOCKET GetSocketBy(string userName);
 
 private:
 	ClientSocketStore();
