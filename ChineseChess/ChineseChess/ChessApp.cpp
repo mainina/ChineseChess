@@ -38,6 +38,9 @@ void ChessApp::Startup(int iSdPlayer)
 	bmpSelected = LoadResBmp(hInst, IDB_SELECTED);
 	cBoard->Startup(hInst, iSdPlayer);
 	mvLast->Init();
+
+	//PostMessage(this->hWnd, WM_PAINT, )
+	RedrawWindow(this->hWnd, NULL, NULL, RDW_ERASE | RDW_INVALIDATE);
 }
 
 BOOL ChessApp::IsSelected(void)
