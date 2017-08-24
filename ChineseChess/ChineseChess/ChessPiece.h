@@ -4,6 +4,7 @@
 #include "Config.h"
 
 class ChessBoard;
+class ChessApp;
 
 class ChessPiece
 {

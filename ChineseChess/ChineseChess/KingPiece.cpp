@@ -2,6 +2,8 @@
 #include "Util.h"
 #include "resource.h"
 #include "KingPiece.h"
+#include "ChessBoard.h"
+#include "ChessApp.h"
 
 
 KingPiece::KingPiece(ChessBoard* board)
@@ -19,18 +21,22 @@ KingPiece::KingPiece(ChessBoard* board, HINSTANCE hInst, int color)
 	{
 		name = "½«";
 		bmpPiece = LoadResBmp(hInst, IDB_BK);
-
-
-		location.x = 4;
-		location.y = 0;
 	}
 	else
 	{
 		name = "Ë§";
 		bmpPiece = LoadResBmp(hInst, IDB_RK);
-
+		
+	}
+	if (board->SdPlayer() == color)
+	{
 		location.x = 4;
 		location.y = 9;
+	}
+	else
+	{
+		location.x = 4;
+		location.y = 0;
 	}
 }
 
@@ -44,7 +50,7 @@ BOOL KingPiece::Check(MoveStep* step)
 	BOOL condition1 = step->dest.x >= 3 && step->dest.x <= 5;
 	BOOL condition2 = FALSE;
 	BOOL condition3 = FALSE;
-	if(color == BACK)
+	if(color != ChessApp::GetInstance()->GetSdPlayer())
 	{
 		condition2 = step->dest.y >= 0 && step->dest.y <= 2;
 	}

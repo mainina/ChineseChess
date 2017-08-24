@@ -3,6 +3,7 @@
 #include "Util.h"
 #include "BishopPiece.h"
 #include "ChessBoard.h"
+#include "ChessApp.h"
 
 BishopPiece::BishopPiece(ChessBoard* board)
 	:ChessPiece(board)
@@ -18,18 +19,21 @@ BishopPiece::BishopPiece(ChessBoard* board, HINSTANCE hInst, int color)
 	{
 		name = "Ïó";
 		bmpPiece = LoadResBmp(hInst, IDB_BB);
-
-
-		location.x = 2;
-		location.y = 0;
 	}
 	else
 	{
 		name = "Ïà";
 		bmpPiece = LoadResBmp(hInst, IDB_RB);
-
+	}
+	if (board->SdPlayer() == color)
+	{
 		location.x = 2;
 		location.y = 9;
+	}
+	else
+	{
+		location.x = 2;
+		location.y = 0;
 	}
 }
 
@@ -42,7 +46,7 @@ BOOL BishopPiece::Check(MoveStep* step)
 {
 	BOOL condition1 = step->dest.x >= 0 && step->dest.x <= 8;
 	BOOL condition2 = FALSE, condition3 = FALSE;
-	if(color == BACK)
+	if(color != ChessApp::GetInstance()->GetSdPlayer())
 	{
 		condition2 = step->dest.y >= 0 && step->dest.y <= 4;
 	}

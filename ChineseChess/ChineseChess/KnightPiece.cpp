@@ -19,18 +19,21 @@ KnightPiece::KnightPiece(ChessBoard* board, HINSTANCE hInst, int color)
 	{
 		name = "ñR";
 		bmpPiece = LoadResBmp(hInst, IDB_BN);
-
-
-		location.x = 1;
-		location.y = 0;
 	}
 	else
 	{
 		name = "ñR";
 		bmpPiece = LoadResBmp(hInst, IDB_RN);
-
+	}
+	if (board->SdPlayer() == color)
+	{
 		location.x = 1;
 		location.y = 9;
+	}
+	else
+	{
+		location.x = 1;
+		location.y = 0;
 	}
 }
 

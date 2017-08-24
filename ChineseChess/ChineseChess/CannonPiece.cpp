@@ -12,25 +12,29 @@ CannonPiece::CannonPiece(ChessBoard* board)
 }
 
 CannonPiece::CannonPiece(ChessBoard* board, HINSTANCE hInst, int color)
-	:ChessPiece(board, hInst, color)
+	: ChessPiece(board, hInst, color)
 {
 	new (this)CannonPiece(board);
 
-	if(color == BACK)
+	if (color == BACK)
 	{
 		name = "ез";
 		bmpPiece = LoadResBmp(hInst, IDB_BC);
-
-		location.x = 1;
-		location.y = 2;
 	}
 	else
 	{
 		name = "ез";
 		bmpPiece = LoadResBmp(hInst, IDB_RC);
-
+	}
+	if (board->SdPlayer() == color)
+	{
 		location.x = 1;
 		location.y = 7;
+	}
+	else
+	{
+		location.x = 1;
+		location.y = 2;
 	}
 }
 
@@ -50,16 +54,16 @@ BOOL CannonPiece::Check(MoveStep* step)
 
 	BOOL condition4 = TRUE;
 	int middleCount = 0;
-	if(xd == 0)
+	if (xd == 0)
 	{
-		if(step->dest.y > step->src.y)
+		if (step->dest.y > step->src.y)
 		{
-			for(LONG y0 = step->src.y + 1; y0 < step->dest.y; y0++)
+			for (LONG y0 = step->src.y + 1; y0 < step->dest.y; y0++)
 			{
-				if(board->FindPiece(step->dest.x, y0) != NULL)
+				if (board->FindPiece(step->dest.x, y0) != NULL)
 				{
 					middleCount++;
-					if(middleCount > 1)
+					if (middleCount > 1)
 					{
 						condition4 = FALSE;
 						break;
@@ -69,12 +73,12 @@ BOOL CannonPiece::Check(MoveStep* step)
 		}
 		else
 		{
-			for(LONG y0 = step->dest.y + 1; y0 < step->src.y; y0++)
+			for (LONG y0 = step->dest.y + 1; y0 < step->src.y; y0++)
 			{
-				if(board->FindPiece(step->dest.x, y0) != NULL)
+				if (board->FindPiece(step->dest.x, y0) != NULL)
 				{
 					middleCount++;
-					if(middleCount > 1)
+					if (middleCount > 1)
 					{
 						condition4 = FALSE;
 						break;
@@ -85,14 +89,14 @@ BOOL CannonPiece::Check(MoveStep* step)
 	}
 	else
 	{
-		if(step->dest.x > step->src.x)
+		if (step->dest.x > step->src.x)
 		{
-			for(LONG x0 = step->src.x + 1; x0 < step->dest.x; x0++)
+			for (LONG x0 = step->src.x + 1; x0 < step->dest.x; x0++)
 			{
-				if(board->FindPiece(x0, step->dest.y) != NULL)
+				if (board->FindPiece(x0, step->dest.y) != NULL)
 				{
 					middleCount++;
-					if(middleCount > 1)
+					if (middleCount > 1)
 					{
 						condition4 = FALSE;
 						break;
@@ -102,12 +106,12 @@ BOOL CannonPiece::Check(MoveStep* step)
 		}
 		else
 		{
-			for(LONG x0 = step->dest.x + 1; x0 < step->src.x; x0++)
+			for (LONG x0 = step->dest.x + 1; x0 < step->src.x; x0++)
 			{
-				if(board->FindPiece(x0, step->dest.y) != NULL)
+				if (board->FindPiece(x0, step->dest.y) != NULL)
 				{
 					middleCount++;
-					if(middleCount > 1)
+					if (middleCount > 1)
 					{
 						condition4 = FALSE;
 						break;
@@ -117,10 +121,10 @@ BOOL CannonPiece::Check(MoveStep* step)
 		}
 	}
 
-	if(condition4)
+	if (condition4)
 	{
 		ChessPiece* piece = board->FindPiece(step->dest.x, step->dest.y);
-		if(middleCount == 1)
+		if (middleCount == 1)
 		{
 			condition4 = piece != NULL && piece->Color() != board->SdPlayer();
 		}

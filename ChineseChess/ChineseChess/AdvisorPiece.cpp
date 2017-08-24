@@ -2,6 +2,7 @@
 #include "Util.h"
 #include "resource.h"
 #include "AdvisorPiece.h"
+#include "ChessApp.h"
 
 AdvisorPiece::AdvisorPiece(ChessBoard* board)
 	:ChessPiece(board)
@@ -23,7 +24,7 @@ AdvisorPiece::AdvisorPiece(ChessBoard* board, HINSTANCE hInst, int color)
 		name = "ÊË";
 		bmpPiece = LoadResBmp(hInst, IDB_RA);
 	}
-	if (board->SdPlayer() == BACK)
+	if (board->SdPlayer() == color)
 	{
 		location.x = 3;
 		location.y = 9;
@@ -43,7 +44,7 @@ BOOL AdvisorPiece::Check(MoveStep* step)
 {
 	BOOL condition1 = step->dest.x >= 3 && step->dest.x <= 5;
 	BOOL condition2 = FALSE, condition3 = FALSE;
-	if(color == BACK)
+	if(color != ChessApp::GetInstance()->GetSdPlayer())
 	{
 		condition2 = step->dest.y >= 0 && step->dest.y <= 2;
 	}

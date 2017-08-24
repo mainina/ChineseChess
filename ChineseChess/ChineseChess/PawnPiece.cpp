@@ -2,6 +2,8 @@
 #include "resource.h"
 #include "Util.h"
 #include "PawnPiece.h"
+#include "ChessBoard.h"
+#include "ChessApp.h"
 
 
 PawnPiece::PawnPiece(ChessBoard* board)
@@ -18,17 +20,22 @@ PawnPiece::PawnPiece(ChessBoard* board, HINSTANCE hInst, int color)
 	{
 		name = "×ä";
 		bmpPiece = LoadResBmp(hInst, IDB_BP);
-
-		location.x = 0;
-		location.y = 3;
 	}
 	else
 	{
 		name = "±ø";
 		bmpPiece = LoadResBmp(hInst, IDB_RP);
+	}
 
+	if (board->SdPlayer() == color)
+	{
 		location.x = 0;
 		location.y = 6;
+	}
+	else
+	{
+		location.x = 0;
+		location.y = 3;
 	}
 }
 
@@ -41,7 +48,7 @@ BOOL PawnPiece::Check(MoveStep* step)
 {
 	BOOL condition1 = FALSE;
 	BOOL condition2 = TRUE;
-	if(color == BACK)
+	if(color != ChessApp::GetInstance()->GetSdPlayer())
 	{
 		condition1 = step->dest.y >= 3 && step->dest.y <= 5 && step->src.x == step->dest.x && (step->dest.y - step->src.y) == 1;
 		if(step->dest.y >=5)

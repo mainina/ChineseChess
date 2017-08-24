@@ -20,17 +20,21 @@ RookPiece::RookPiece(ChessBoard* board, HINSTANCE hInst, int color)
 	{
 		name = "܇";
 		bmpPiece = LoadResBmp(hInst, IDB_BR);
-
-		location.x = 0;
-		location.y = 0;
 	}
 	else
 	{
 		name = "܇";
 		bmpPiece = LoadResBmp(hInst, IDB_RR);
-
+	}
+	if (board->SdPlayer() == color)
+	{
 		location.x = 0;
 		location.y = 9;
+	}
+	else
+	{
+		location.x = 0;
+		location.y = 0;
 	}
 }
 
