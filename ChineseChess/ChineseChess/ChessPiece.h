@@ -29,6 +29,7 @@ public:
 	void SetLocation(LONG x, LONG y);
 	HBITMAP Bmp(void);
 	int Color(void);
+	int Id() { return id; }
 	virtual int Count(void) = 0;
 
 	virtual BOOL Check(MoveStep* step) = 0;

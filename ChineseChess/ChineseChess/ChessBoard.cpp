@@ -105,6 +105,18 @@ ChessPiece* ChessBoard::FindPiece(int x, int y)
 	return NULL;
 }
 
+bool ChessBoard::IsWin(int sdPlayer)
+{
+	for (Vint::iterator it = pieceVector.begin(); it != pieceVector.end(); it++)
+	{
+		if ((*it)->Color() != sdPlayer && (*it)->Id() == PIECE_KING)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 void ChessBoard::ChangeSide(void)
 {
 	sdPlayer = 1 - sdPlayer;

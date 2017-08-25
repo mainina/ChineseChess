@@ -24,5 +24,6 @@ public:
 	void MovePiece(MoveStep step);
 	void MakeMove(MoveStep step);
 	ChessPiece* FindPiece(int x, int y);
+	bool IsWin(int sdPlayer);
 };
 

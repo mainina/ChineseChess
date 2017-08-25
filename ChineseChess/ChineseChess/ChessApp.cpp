@@ -82,7 +82,17 @@ void ChessApp::OtherFightMove(MoveStep * step, int changeSide)
 	cBoard->ChangeSide(changeSide);
 	ClickOrMove(step->src.x, step->src.y);
 	ClickOrMove(step->dest.x, step->dest.y);
-	isWaiting = false;
+
+	// ÅÐ¶ÏÊÇÊäÓ®
+	if (cBoard->IsWin(sdPlayer))
+	{
+		// todo win, tell service
+		ShowWinDialog(IDS_B_WIN_CONTENT);
+	}
+	else
+	{
+		isWaiting = false;
+	}
 }
 
 void ChessApp::NotSelect(void)
@@ -126,6 +136,13 @@ void ChessApp::Click(int x, int y)
 	if (!isWaiting)
 	{
 		ClickOrMove(x, y);
+
+		// ÅÐ¶ÏÊÇÊäÓ®
+		if (cBoard->IsWin(sdPlayer))
+		{
+			// todo win, tell service
+			ShowWinDialog(IDS_R_WIN_CONTENT);
+		}
 	}
 }
 
@@ -135,6 +152,15 @@ void ChessApp::ShowDialog(void)
 	LoadString(hInst, IDS_ERROR_CONTENT, errorTitle, 100);
 	TCHAR errorContent[100];
 	LoadString(hInst, IDS_ERROR_TITLE, errorContent, 100);
+	MessageBox(GetForegroundWindow(), errorTitle, errorContent, 1);
+}
+
+void ChessApp::ShowWinDialog(int IDS_WIN_CONTENT)
+{
+	TCHAR errorTitle[100];
+	LoadString(hInst, IDS_WIN_CONTENT, errorTitle, 100);
+	TCHAR errorContent[100];
+	LoadString(hInst, IDS_WIN_TITLE, errorContent, 100);
 	MessageBox(GetForegroundWindow(), errorTitle, errorContent, 1);
 }
 

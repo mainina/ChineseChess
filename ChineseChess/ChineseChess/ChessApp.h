@@ -44,6 +44,7 @@ public:
 
 private:
 	void ShowDialog(void);
+	void ShowWinDialog(int sdPlayer);
 	void ClickOrMove(int x, int y);
 };
 
